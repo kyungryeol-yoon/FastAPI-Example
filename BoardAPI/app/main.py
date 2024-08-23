@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Request
-from app import board_api
+from app.routers import app_v1
 # from helper.log_helper import setup_logger
 # from browsepy import app as flask_app
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-# from fastapi.middleware.wsgi import WSGIMiddleware
+from fastapi.middleware.wsgi import WSGIMiddleware
 
 app = FastAPI(
     title="Test API",
@@ -30,7 +30,7 @@ app.add_middleware(
 
 # app.add_middleware(LoggingMiddleware)
 
-app.include_router(board_api.router)
+app.include_router(app_v1)
 
 # Swagger 숨김
 @app.get("/", include_in_schema=False)
