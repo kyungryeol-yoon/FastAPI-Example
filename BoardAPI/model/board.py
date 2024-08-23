@@ -1,10 +1,11 @@
 from datetime import datetime, time, timedelta
 from pydantic import BaseModel, Field
+from typing import Optional
 
 class Board(BaseModel):
-    no: int
+    no: Optional[int] = 0
     title: str
     writer: str
     content: str
-    regDate: datetime
-    updDate: datetime
+    regDate: Optional[datetime] = None
+    updDate: Optional[datetime] = None

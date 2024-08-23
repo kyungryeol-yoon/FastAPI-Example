@@ -20,7 +20,14 @@ async def read_board_item(board_id: int):
 
 @router.post("")
 async def insert_board(board_item: Board) -> dict:
+    print(len(board_list))
+    board_item.no = len(board_list) + 1
+    #board_item.regDate = datetime.now
+    #board_item.updDate = datetime.now
+    #dict(board_item)
     board_list.append(board_item)
+    print(board_list)
+
     return {"message": "Added successfully"}
 
 @router.put("/{board_id}")
