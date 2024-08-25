@@ -30,20 +30,21 @@ async def insert_board(board_item: Board) -> dict:
 
     return {"message": "Added successfully"}
 
-@router.put("/{board_id}")
-async def update_board(board_item: Board, board_id: int = Path(..., title="The Id of the board to be updated")) -> dict:
+@router.put("")
+async def update_board(board_item: Board) -> dict:
     for board in board_list:
-        if board.no == board_id:
+        if board.no == board_item.no:
             board.title = board_item.title
+            board.writer = board_item.writer
             board.content = board_item.content
             return { "message": "Updated successfully" }
     return { "message": "ID doesn't exist." }
 
 @router.delete("/{board_id}")
 async def delete_board_item(board_id: int):
-    board_item = board_list[board_id]
-    if board_item.no == board_id:
-        board_list.pop(board_id)
+    for board in board_list:
+        if board.no == board_id:
+            board_list.remove(board)
         return { "message": "Deleted successfully" }
     return { "message": "ID dosen't exist" }
 
